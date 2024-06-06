@@ -1,0 +1,33 @@
+import { sync } from "glob";
+
+export async function loadEvents(client) {
+  const eventFiles = sync("./src/events/**/*.js");
+
+  for (const file of eventFiles) {
+    const event = await import(`../../${file}`);
+
+    if (!event.data?.name) {
+      throw new TypeError(
+        `The event at ${file} is missing a required "data.name" property.`
+      );
+    }
+
+    if (typeof event.execute !== "function") {
+      throw new TypeError(
+        `The event at ${file} is missing a required "execute" function.`
+      );
+    }
+
+    if (event.type === "distube") {
+      client.distube.on(event.data.name, (...args) => event.execute(...args));
+    } else if (event.once) {
+      client.once(event.data.name, (...args) => event.execute(...args));
+    } else {
+      client.on(event.data.name, (...args) => event.execute(...args));
+    }
+
+    if (process.env.DEVELOPMENT === "true") {
+      console.debug(`Loaded event: ${event.data.name}`);
+    }
+  }
+}

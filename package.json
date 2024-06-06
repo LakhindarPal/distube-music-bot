@@ -1,0 +1,57 @@
+{
+  "name": "distube-music-bot",
+  "version": "0.1.0",
+  "description": "A music bot for discord built using distube and discord.js",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "lint": "eslint src/**/*.js --fix",
+    "format": "prettier . --write",
+    "start": "node .",
+    "dev": "node --watch-path=./src ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LakhindarPal/distube-music-bot.git"
+  },
+  "keywords": [
+    "distube",
+    "bot",
+    "discord",
+    "music",
+    "discordjs",
+    "music-bot"
+  ],
+  "author": "Lakhindar Pal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LakhindarPal/distube-music-bot/issues"
+  },
+  "homepage": "https://github.com/LakhindarPal/distube-music-bot#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.9.0",
+    "@discordjs/voice": "^0.17.0",
+    "@distube/deezer": "^2.0.0",
+    "@distube/direct-link": "^1.0.0",
+    "@distube/file": "^1.0.0",
+    "@distube/soundcloud": "^2.0.1",
+    "@distube/spotify": "^2.0.0",
+    "@distube/youtube": "^1.0.1",
+    "discord.js": "^14.15.3",
+    "distube": "^5.0.1",
+    "distube-apple-music": "^0.1.0",
+    "distube-tidal": "^0.1.0",
+    "dotenv": "^16.4.5",
+    "glob": "^10.4.1",
+    "node-opus": "^0.3.3",
+    "opusscript": "^0.1.1",
+    "sodium-native": "^4.1.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "9.x",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.3.0",
+    "prettier": "3.3.0"
+  }
+}
