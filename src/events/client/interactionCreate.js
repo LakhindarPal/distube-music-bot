@@ -57,8 +57,8 @@ You can use it again <t:${expiredTimestamp}:R>.`
     });
   }
 
-  const selfChannel = interaction.guild.members.me?.voice.channel;
-  const memberChannel = interaction.member.voice.channel;
+  const selfChannel = interaction.guild.members.me?.voice?.channel;
+  const memberChannel = interaction.member.voice?.channel;
 
   if (!selfChannel && !memberChannel) {
     return interaction.reply({
@@ -69,7 +69,7 @@ You can use it again <t:${expiredTimestamp}:R>.`
     });
   }
 
-  if (selfChannel && selfChannel.id !== memberChannel.id) {
+  if (selfChannel && selfChannel.id !== memberChannel?.id) {
     return interaction.reply({
       embeds: [
         ErrorEmbed(

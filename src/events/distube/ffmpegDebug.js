@@ -5,7 +5,7 @@ export const data = {
   type: "distube",
 };
 export function execute(message) {
-  if (process.env.DEVELOPMENT === "true") {
+  if (process.env.DEVELOPMENT_MODE === "true") {
     console.log(message);
   }
 }

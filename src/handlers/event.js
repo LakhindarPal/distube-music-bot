@@ -26,7 +26,7 @@ export async function loadEvents(client) {
       client.on(event.data.name, (...args) => event.execute(...args));
     }
 
-    if (process.env.DEVELOPMENT === "true") {
+    if (process.env.DEVELOPMENT_MODE === "true") {
       console.debug(`Loaded event: ${event.data.name}`);
     }
   }

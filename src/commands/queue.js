@@ -1,57 +1,49 @@
-import { RepeatMode } from "distube";
-import { getSongDurationInfo } from "../utils/songDuration.js";
 import { BaseEmbed } from "../utils/Embeds.js";
+import { ApplicationCommandOptionType } from "discord.js";
 
 export const data = {
   name: "queue",
-  description: "Show the current queue",
+  description: "Show the songs in the queue",
+  options: [
+    {
+      type: ApplicationCommandOptionType.Number,
+      name: "page",
+      description: "The page number (defaults to 1)",
+      required: false,
+      min_value: 1,
+    },
+  ],
 };
 export async function execute(interaction, queue) {
   if (!queue) return;
+  const queueSongs = queue.songs.slice(1);
+  const queueSize = queue.songs.length;
 
-  const current = queue.songs[0];
-  const upcoming = queue.songs
-    .slice(1, 11)
-    .map(
-      (song, i) =>
-        `**${i + 1}.** [${song.name}](${song.url}) - \`${getSongDurationInfo(song).formattedDuration}\``
+  let page = interaction.options.getNumber("page", false) ?? 1;
+
+  const multiple = 10;
+
+  const maxPage = Math.ceil(queueSize / multiple);
+
+  if (page > maxPage) page = maxPage;
+
+  const end = page * multiple;
+  const start = end - multiple;
+
+  const tracks = queueSongs.slice(start, end);
+
+  const embed = BaseEmbed()
+    .setDescription(
+      tracks
+        .map(
+          (song, i) =>
+            `**${start + i + 1}.** [${song.name}](${song.url}) ~ [${song.user.toString()}]`
+        )
+        .join("\n")
     )
-    .join("\n");
-  const Progress = `${queue.formattedCurrentTime} / ${getSongDurationInfo(current).formattedDuration}`;
-  const formattedQueueSongs = `**Current:**\n[${current.name}](${current.url}) - ${Progress}\n\n**Upcoming:**\n${upcoming}`;
+    .setFooter({
+      text: `Page ${page} of ${maxPage} | songs ${start + 1} to ${end > queueSize ? `${queueSize}` : `${end}`} of ${queueSize}`,
+    });
 
-  return interaction.reply({
-    embeds: [
-      BaseEmbed()
-        .setDescription(formattedQueueSongs)
-        .addFields(
-          {
-            name: "Volume",
-            value: `${queue.volume}%`,
-            inline: true,
-          },
-          {
-            name: "Autoplay",
-            value: `${queue.autoplay ? "On" : "Off"}`,
-            inline: true,
-          },
-          {
-            name: "Repeat",
-            value: `${
-              queue.repeatMode === RepeatMode.QUEUE
-                ? "Queue"
-                : queue.repeatMode === RepeatMode.SONG
-                  ? "Song"
-                  : "Off"
-            }`,
-            inline: true,
-          },
-          {
-            name: "Filters",
-            value: `${queue.filters.names.join(", ") || "None"}`,
-            inline: false,
-          }
-        ),
-    ],
-  });
+  return interaction.reply({ embeds: [embed] });
 }
