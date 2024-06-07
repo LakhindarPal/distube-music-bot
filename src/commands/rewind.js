@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord.js";
-import Embeds from "../utils/Embeds.js";
+import { ErrorEmbed, SuccessEmbed } from "../utils/Embeds.js";
 
 export const data = {
   name: "rewind",
@@ -20,13 +20,13 @@ export function execute(interaction, queue) {
 
   if (duration < 0) {
     return interaction.reply({
-      embeds: [Embeds.Error("Cannot go backward that far!")],
+      embeds: [ErrorEmbed("Cannot go backward that far!")],
     });
   }
 
   queue.seek(duration);
 
   return interaction.reply({
-    embeds: [Embeds.Success(`Rewinded for ${time} seconds!`)],
+    embeds: [SuccessEmbed(`Rewinded ${time} seconds!`)],
   });
 }

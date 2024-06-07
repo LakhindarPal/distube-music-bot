@@ -14,7 +14,7 @@ export const data = {
     {
       type: ApplicationCommandOptionType.Boolean,
       name: "skip",
-      description: "Skip the current song (Available if vote skip is off)",
+      description: "Skip the current song",
       required: false,
     },
     {
@@ -36,8 +36,8 @@ export async function execute(interaction) {
   await interaction.deferReply();
 
   await interaction.client.distube.play(vc, input, {
-    skip,
     position,
+    skip,
     textChannel: interaction.channel ?? undefined,
     member: interaction.member,
     metadata: { interaction },

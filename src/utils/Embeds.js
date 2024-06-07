@@ -1,49 +1,45 @@
 import { Colors, EmbedBuilder } from "discord.js";
 
-class Embeds extends EmbedBuilder {
-  /**
-   * Creates an error embed.
-   * @param {string} data - The description text for the embed.
-   * @returns {Embeds} The created embed with red color.
-   */
-  static Error(data) {
-    return Embeds.create(data).setColor(Colors.Red);
-  }
+/**
+ * Creates a base embed with the given data and color.
+ *
+ * @param {Object} [params={}] - The parameters for the embed.
+ * @param {Object} [params.data={}] - The data for the embed.
+ * @param {string} [params.color=Colors.Blurple] - The color of the embed.
+ * @returns {EmbedBuilder} The configured embed.
+ */
+export const BaseEmbed = ({ data = {}, color = Colors.Blurple } = {}) => {
+  return new EmbedBuilder(data).setColor(color);
+};
 
-  /**
-   * Creates a success embed.
-   * @param {string} data - The description text for the embed.
-   * @returns {Embeds} The created embed with green color.
-   */
-  static Success(data) {
-    return Embeds.create(data).setColor(Colors.Green);
-  }
+/**
+ * Creates an error embed.
+ * @param {string} text - The description text for the embed.
+ * @returns {EmbedBuilder} The created embed with red color.
+ */
+export const ErrorEmbed = (text) =>
+  BaseEmbed({ data: { description: text }, color: Colors.Red });
 
-  /**
-   * Creates a warning embed.
-   * @param {string} data - The description text for the embed.
-   * @returns {Embeds} The created embed with dark orange color.
-   */
-  static Warning(data) {
-    return Embeds.create(data).setColor(Colors.DarkOrange);
-  }
+/**
+ * Creates a success embed.
+ * @param {string} text - The description text for the embed.
+ * @returns {EmbedBuilder} The created embed with green color.
+ */
+export const SuccessEmbed = (text) =>
+  BaseEmbed({ data: { description: text }, color: Colors.Green });
 
-  /**
-   * Creates an informational embed.
-   * @param {string} data - The description text for the embed.
-   * @returns {Embeds} The created embed with blurple color.
-   */
-  static Info(data) {
-    return Embeds.create(data).setColor(Colors.Blurple);
-  }
+/**
+ * Creates a warning embed.
+ * @param {string} text - The description text for the embed.
+ * @returns {EmbedBuilder} The created embed with dark orange color.
+ */
+export const WarningEmbed = (text) =>
+  BaseEmbed({ data: { description: text }, color: Colors.DarkOrange });
 
-  static create(data) {
-    return new Embeds().setDescription(data);
-  }
-
-  constructor(data) {
-    super(data);
-  }
-}
-
-export default Embeds;
+/**
+ * Creates an informational embed.
+ * @param {string} text - The description text for the embed.
+ * @returns {EmbedBuilder} The created embed with blurple color.
+ */
+export const InfoEmbed = (text) =>
+  BaseEmbed({ data: { description: text }, color: Colors.Blurple });

@@ -1,5 +1,5 @@
 import { Collection, Events } from "discord.js";
-import Embeds from "../../utils/Embeds.js";
+import { ErrorEmbed, WarningEmbed } from "../../utils/Embeds.js";
 
 export const data = {
   name: Events.InteractionCreate,
@@ -36,7 +36,7 @@ export async function execute(interaction) {
       const expiredTimestamp = Math.round(expirationTime / 1000);
       return interaction.reply({
         embeds: [
-          Embeds.Warning(
+          WarningEmbed(
             `Please wait, you are on a cooldown for \`${commandName}\` command.
 You can use it again <t:${expiredTimestamp}:R>.`
           ),
@@ -52,7 +52,7 @@ You can use it again <t:${expiredTimestamp}:R>.`
   const queue = interaction.client.distube.getQueue(interaction);
   if (commandName !== "play" && !queue) {
     return interaction.reply({
-      embeds: [Embeds.Error("I am not playing anything right now!")],
+      embeds: [ErrorEmbed("I am not playing anything right now!")],
       ephemeral: true,
     });
   }
@@ -63,7 +63,7 @@ You can use it again <t:${expiredTimestamp}:R>.`
   if (!selfChannel && !memberChannel) {
     return interaction.reply({
       embeds: [
-        Embeds.Warning("You must join a voice channel to use this command!"),
+        WarningEmbed("You must join a voice channel to use this command!"),
       ],
       ephemeral: true,
     });
@@ -72,7 +72,7 @@ You can use it again <t:${expiredTimestamp}:R>.`
   if (selfChannel && selfChannel.id !== memberChannel.id) {
     return interaction.reply({
       embeds: [
-        Embeds.Error(
+        ErrorEmbed(
           `You must join ${selfChannel.toString()} channel to use this command.`
         ),
       ],
@@ -87,14 +87,14 @@ You can use it again <t:${expiredTimestamp}:R>.`
     if (interaction.replied || interaction.deferred) {
       return interaction.followUp({
         embeds: [
-          Embeds.Error("There was an error while executing this command!"),
+          ErrorEmbed("There was an error while executing this command!"),
         ],
         ephemeral: true,
       });
     } else {
       return interaction.reply({
         embeds: [
-          Embeds.Error("There was an error while executing this command!"),
+          ErrorEmbed("There was an error while executing this command!"),
         ],
         ephemeral: true,
       });

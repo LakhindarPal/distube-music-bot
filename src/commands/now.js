@@ -1,24 +1,31 @@
-import { Colors, EmbedBuilder } from "discord.js";
+import { BaseEmbed } from "../utils/Embeds.js";
+import ProgressBar from "../utils/ProgressBar.js";
+import { getSongDurationInfo } from "../utils/songDuration.js";
 
 export const data = {
   name: "now",
-  description: "Show the current playing song",
+  description: "Show the currently playing song",
 };
 export function execute(interaction, queue) {
   const song = queue.songs[0];
-  const formattedDuration = song.stream.playFromSource
-    ? song.formattedDuration
-    : song.stream.song?.formattedDuration;
+  const durationInfo = getSongDurationInfo(song);
+  const bar = ProgressBar({
+    current: queue.currentTime,
+    total: durationInfo.duration,
+  });
 
-  const embed = new EmbedBuilder()
-    .setTitle("Now Playing")
-    .setDescription(`${song.name} - ${formattedDuration}`)
+  const embed = BaseEmbed()
+    .setAuthor({ name: "Now Playing" })
+    .setTitle(song.name)
+    .setURL(song.url)
+    .setDescription(
+      `**Progress**: ${queue.formattedCurrentTime} / ${durationInfo.formattedDuration}\n${bar}`
+    )
     .setThumbnail(song.thumbnail)
     .setFooter({
-      text: `Requested by ${song.user.tag}`,
+      text: `Played by ${song.user.tag}`,
       iconURL: song.member.displayAvatarURL(),
-    })
-    .setColor(Colors.Blurple);
+    });
 
-  interaction.reply({ embeds: [embed] });
+  return interaction.reply({ embeds: [embed] });
 }

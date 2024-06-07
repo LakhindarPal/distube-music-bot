@@ -18,9 +18,9 @@ export async function loadEvents(client) {
       );
     }
 
-    if (event.type === "distube") {
+    if (event.data.type === "distube") {
       client.distube.on(event.data.name, (...args) => event.execute(...args));
-    } else if (event.once) {
+    } else if (event.data.once) {
       client.once(event.data.name, (...args) => event.execute(...args));
     } else {
       client.on(event.data.name, (...args) => event.execute(...args));

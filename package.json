@@ -1,6 +1,6 @@
 {
   "name": "distube-music-bot",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A music bot for discord built using distube and discord.js",
   "main": "src/index.js",
   "type": "module",
@@ -35,7 +35,7 @@
     "@distube/direct-link": "^1.0.0",
     "@distube/file": "^1.0.0",
     "@distube/soundcloud": "^2.0.1",
-    "@distube/spotify": "^2.0.0",
+    "@distube/spotify": "^2.0.1",
     "@distube/youtube": "^1.0.1",
     "discord.js": "^14.15.3",
     "distube": "^5.0.1",
@@ -49,9 +49,9 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.4.0",
-    "eslint": "9.x",
+    "eslint": "^9.4.0",
     "eslint-config-prettier": "^9.1.0",
-    "globals": "^15.3.0",
+    "globals": "^15.4.0",
     "prettier": "3.3.0"
   }
 }

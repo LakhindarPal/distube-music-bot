@@ -1,5 +1,6 @@
 import { ApplicationCommandOptionType } from "discord.js";
-import Embeds from "../utils/Embeds.js";
+import { ErrorEmbed, SuccessEmbed } from "../utils/Embeds.js";
+import { getSongDurationInfo } from "../utils/songDuration.js";
 
 export const data = {
   name: "forward",
@@ -17,15 +18,17 @@ export const data = {
 export function execute(interaction, queue) {
   const time = interaction.options.getNumber("time", false) ?? 10;
   const duration = queue.currentTime + time;
+  const { duration: songDuration } = getSongDurationInfo(queue.songs[0]);
 
-  if (duration > queue.songs[0].duration) {
+  if (duration > songDuration) {
     return interaction.reply({
-      embeds: [Embeds.Error("Cannot go forward that far!")],
+      embeds: [ErrorEmbed("Cannot go forward that far!")],
     });
   }
+
   queue.seek(duration);
 
   return interaction.reply({
-    embeds: [Embeds.Success(`Forwarded for ${time} seconds!`)],
+    embeds: [SuccessEmbed(`Forwarded ${time} seconds!`)],
   });
 }

@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord.js";
-import Embeds from "../utils/Embeds.js";
+import { ErrorEmbed, SuccessEmbed, WarningEmbed } from "../utils/Embeds.js";
 
 export const data = {
   name: "jump",
@@ -19,24 +19,24 @@ export async function execute(interaction, queue) {
 
   if (position > 0 && queue.songs.length <= 2 && !queue.autoplay) {
     return interaction.reply({
-      embeds: [Embeds.Warning("There is no upcoming song to jump to!")],
+      embeds: [WarningEmbed("There is no upcoming song to jump to!")],
     });
   }
   if (position < 0 && queue.previousSongs.length < 1) {
     return interaction.reply({
-      embeds: [Embeds.Warning("There is no previous song to jump to!")],
+      embeds: [WarningEmbed("There is no previous song to jump to!")],
     });
   }
 
   if (position === 0)
     return interaction.reply({
-      embeds: [Embeds.Error("Already at position 0")],
+      embeds: [ErrorEmbed("Already at position 0")],
     });
 
   if (position > queue.songs.length)
     return interaction.reply({
       embeds: [
-        Embeds.Error(
+        ErrorEmbed(
           `Position must be less than or equal to ${queue.songs.length}`
         ),
       ],
@@ -44,7 +44,7 @@ export async function execute(interaction, queue) {
   if (position < -queue.previousSongs.length)
     return interaction.reply({
       embeds: [
-        Embeds.Error(
+        ErrorEmbed(
           `Position must be greater than or equal to ${queue.previousSongs.length}`
         ),
       ],
@@ -53,6 +53,6 @@ export async function execute(interaction, queue) {
   await queue.jump(position);
 
   return interaction.reply({
-    embeds: [Embeds.Success(`Jumped to position ${position}`)],
+    embeds: [SuccessEmbed(`Jumped to position ${position}`)],
   });
 }

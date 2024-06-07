@@ -14,11 +14,11 @@ export async function execute(client) {
   await loadCommands(client);
 
   client.user.setPresence({
-    activities: [{ name: "with Discord.js", type: ActivityType.Playing }],
+    activities: [{ name: "/help", type: ActivityType.Listening }],
     status: PresenceUpdateStatus.Online,
   });
 
-  if (process.env.DEVELOPMENT === "true") {
+  if (process.env.REGISTER_COMMANDS === "true") {
     const commands = client.commands.map(({ data: cmd }) => ({
       type: ApplicationCommandType.ChatInput,
       name: cmd.name,

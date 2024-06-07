@@ -1,4 +1,4 @@
-import Embeds from "../utils/Embeds.js";
+import { SuccessEmbed, WarningEmbed } from "../utils/Embeds.js";
 
 export const data = {
   name: "resume",
@@ -7,10 +7,11 @@ export const data = {
 export function execute(interaction, queue) {
   if (!queue.paused) {
     return interaction.reply({
-      embeds: [Embeds.Warning("The song is already playing!")],
+      embeds: [WarningEmbed("The song is already playing!")],
     });
   }
 
   queue.resume();
-  return interaction.reply({ embeds: [Embeds.Success("Resumed the song!")] });
+
+  return interaction.reply({ embeds: [SuccessEmbed("Resumed the song!")] });
 }

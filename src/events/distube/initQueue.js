@@ -5,6 +5,6 @@ export const data = {
   type: "distube",
 };
 export function execute(queue) {
-  queue.volume = 100;
+  queue.volume = 70;
   queue.autoplay = true;
 }

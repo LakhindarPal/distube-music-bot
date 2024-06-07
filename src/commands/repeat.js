@@ -1,5 +1,5 @@
 import { ApplicationCommandOptionType } from "discord.js";
-import Embeds from "../utils/Embeds.js";
+import { SuccessEmbed } from "../utils/Embeds.js";
 import { RepeatMode } from "distube";
 
 export const data = {
@@ -26,6 +26,6 @@ export function execute(interaction, queue) {
   const status = mode ? (mode === 2 ? "Queue" : "Song") : "Off";
 
   interaction.reply({
-    embeds: [Embeds.Success(`Repeat mode set to \`${status}\``)],
+    embeds: [SuccessEmbed(`Repeat mode set to \`${status}\``)],
   });
 }
