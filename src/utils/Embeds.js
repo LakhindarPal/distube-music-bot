@@ -4,7 +4,7 @@ import { Colors, EmbedBuilder } from "discord.js";
  * Creates a base embed with the given data and color.
  *
  * @param {Object} [params={}] - The parameters for the embed.
- * @param {Object} [params.data={}] - The data for the embed.
+ * @param {import('discord.js').EmbedData} [params.data={}] - The data for the embed.
  * @param {string} [params.color=Colors.Blurple] - The color of the embed.
  * @returns {EmbedBuilder} The configured embed.
  */

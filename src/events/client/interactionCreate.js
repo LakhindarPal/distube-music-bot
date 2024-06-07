@@ -4,6 +4,12 @@ import { ErrorEmbed, WarningEmbed } from "../../utils/Embeds.js";
 export const data = {
   name: Events.InteractionCreate,
 };
+/**
+ * Executes a chat input command.
+ *
+ * @param {import('discord.js').Interaction} interaction - The interaction object representing the command.
+ * @return {Promise<void>} - A promise that resolves when the command is executed successfully.
+ */
 export async function execute(interaction) {
   if (!interaction.inCachedGuild()) return;
   if (!interaction.isChatInputCommand()) return;
