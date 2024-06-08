@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+.env
+.prettierrc
+.prettierignore
+.eslintrc
+eslint.config.js
+README.md
+LICENSE

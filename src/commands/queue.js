@@ -1,5 +1,5 @@
-import { BaseEmbed } from "../utils/Embeds.js";
 import { ApplicationCommandOptionType } from "discord.js";
+import { BaseEmbed } from "../utils/Embeds.js";
 
 export const data = {
   name: "queue",

@@ -2,6 +2,7 @@ import "dotenv/config";
 
 import { Client, Collection, GatewayIntentBits } from "discord.js";
 
+import { AppleMusicPlugin } from "distube-apple-music";
 import { DeezerPlugin } from "@distube/deezer";
 import { DirectLinkPlugin } from "@distube/direct-link";
 import { DisTube } from "distube";
@@ -10,20 +11,20 @@ import { SoundCloudPlugin } from "@distube/soundcloud";
 import { SpotifyPlugin } from "@distube/spotify";
 import { TidalPlugin } from "distube-tidal";
 import { YouTubePlugin } from "@distube/youtube";
+
 import { loadEvents } from "./handlers/event.js";
-import { AppleMusicPlugin } from "distube-apple-music";
 
 class DisTubeClient extends Client {
   distube = new DisTube(this, {
     plugins: [
       new AppleMusicPlugin(),
-      new YouTubePlugin(),
-      new SoundCloudPlugin(),
-      new SpotifyPlugin(),
       new DeezerPlugin(),
-      new TidalPlugin(),
       new DirectLinkPlugin(),
       new FilePlugin(),
+      new SoundCloudPlugin(),
+      new SpotifyPlugin(),
+      new TidalPlugin(),
+      new YouTubePlugin(),
     ],
     emitAddListWhenCreatingQueue: true,
     emitAddSongWhenCreatingQueue: true,

@@ -1,6 +1,6 @@
 import { ApplicationCommandOptionType } from "discord.js";
-import { SuccessEmbed } from "../utils/Embeds.js";
 import { RepeatMode } from "distube";
+import { SuccessEmbed } from "../utils/Embeds.js";
 
 export const data = {
   name: "repeat",

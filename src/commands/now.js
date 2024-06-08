@@ -1,5 +1,5 @@
-import { BaseEmbed } from "../utils/Embeds.js";
 import ProgressBar from "../utils/ProgressBar.js";
+import { BaseEmbed } from "../utils/Embeds.js";
 import { getSongDurationInfo } from "../utils/songDuration.js";
 
 export const data = {

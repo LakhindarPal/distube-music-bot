@@ -1,6 +1,6 @@
 import { RepeatMode } from "distube";
-import { getSongDurationInfo } from "../utils/songDuration.js";
 import { BaseEmbed } from "../utils/Embeds.js";
+import { getSongDurationInfo } from "../utils/songDuration.js";
 
 export const data = {
   name: "status",
