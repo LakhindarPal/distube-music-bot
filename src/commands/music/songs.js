@@ -22,7 +22,9 @@ export const data = {
 export async function execute(interaction, queue) {
   const type = interaction.options.getSubcommand();
   const songs =
-    type === "previous" ? queue.previousSongs : queue.songs.slice(1);
+    type === "previous"
+      ? queue.previousSongs.toReversed()
+      : queue.songs.slice(1);
 
   if (!songs.length) {
     return interaction.reply({

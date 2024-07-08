@@ -1,6 +1,6 @@
 {
   "name": "distube-music-bot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A music bot for discord built using distube and discord.js",
   "main": "src/index.js",
   "type": "module",
@@ -51,7 +51,7 @@
     "distube-tidal": "^0.1.0",
     "dotenv": "^16.4.5",
     "genius-lyrics": "^4.4.7",
-    "glob": "^10.4.2",
+    "glob": "^10.4.3",
     "opusscript": "^0.1.1",
     "sodium-native": "^4.1.1"
   },
