@@ -10,7 +10,9 @@ logs
 npm-debug.log*
 
 # Directory for environments
+*.env.*
 .env
+.env.local
 .env.sample
 
 # Docker-related files
@@ -24,8 +26,8 @@ README.md
 LICENSE
 SECURITY.md
 
-# Scripts
-scripts
+# Cmd gen Script
+scripts/cmd-doc.js
 
 # Configuration files
 .editorconfig

@@ -14,6 +14,7 @@ RUN npm ci --omit=dev --omit=optional
 
 # Copy the rest of the application code
 COPY src/ ./src/
+COPY scripts/register.js ./scripts/register.js
 
 # Stage 2: Runtime Stage
 FROM node:${NODE_VERSION} AS runtime
